@@ -7,34 +7,37 @@ public class SimulacaoBancaria {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         double saldo = 0;
-        int opcao = 0;
+        boolean emExecucao = true;
 
-        while (opcao != 4) {
-            System.out.println("1 - Depositar\n" +
-                    "2 - Sacar\n" +
-                    "3 - Consultar Saldo\n" +
-                    "4 - Encerrar");
-            opcao = scanner.nextInt();
+        while (emExecucao) {
+
+            int opcao = scanner.nextInt();
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Digite valor do depósito");
+//                    System.out.println("Digite valor do deposito");
                     double deposito = scanner.nextDouble();
                     saldo += deposito;
+                    System.out.println("Saldo atual:" + saldo);
                     break;
                 case 2:
-                    System.out.println("Digite valor do saque");
+//                    System.out.println("Digite valor do saque");
                     double saque = scanner.nextDouble();
-                    if (saque <= saldo) {
+                    if (saque > saldo) {
+
+                        System.out.println("Saldo insulficiente.");
+                    }else{
                         saldo -= saque;
-                        System.out.println("Saldo insulficiente");
+                        System.out.println("Saldo atual:" + saldo);
                     }
                     break;
                 case 3:
-                    System.out.println("Saldo atual: " + saldo);
+                    System.out.println("Saldo atual:" + saldo);
                     break;
-                case 4:
-                    System.out.println("Programa encerrado");
+                case 0:
+                    System.out.println("Programa encerrado.");
+                    emExecucao = false;
+                    scanner.close();
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
